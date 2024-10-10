@@ -19,7 +19,7 @@
   </template>
   
   <script>
-  import { ref, onMounted,computed } from 'vue';
+  import { onMounted,computed } from 'vue';
   import { useStore } from 'vuex'; 
   
   export default {
