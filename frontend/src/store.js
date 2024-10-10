@@ -13,7 +13,7 @@ const store = createStore({
     actions: {
         async fetchArticles({ commit }) {
             try {
-                const response = await apiClient.get('/articles');
+                const response = await apiClient.get('/article');
                 commit('setArticles', response.data);
             } catch (error) {
                 console.error('Error fetching articles:', error);
