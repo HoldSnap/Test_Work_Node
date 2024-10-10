@@ -52,18 +52,19 @@
   
       const submitForm = async () => {
         if (valid.value) {
-          try {
+            try {
             if (isEditing.value) {
-              await store.dispatch('updateArticle', { id: route.params.id, ...article.value });
+                await store.dispatch('updateArticle', { id: route.params.id, updatedArticle: article.value });
             } else {
-              await store.dispatch('createArticle', article.value);
+                await store.dispatch('createArticle', article.value);
             }
             router.push('/');
-          } catch (error) {
+            } catch (error) {
             console.error('Error submitting form:', error);
-          }
+            }
         }
-      };
+       };
+
   
       fetchArticle(); 
   
