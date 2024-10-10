@@ -12,7 +12,8 @@ exports.createComment = async (req, res) => {
 
 exports.getAllComments = async (req, res) => {
     try {
-        const comments = await Comment.findAll();
+        const { articleId } = req.params; 
+        const comments = await Comment.findAll({ where: { articleId } }); 
         res.status(200).json(comments);
     } catch (error) {
         res.status(500).json({ message: error.message });
