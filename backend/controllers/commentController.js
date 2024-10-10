@@ -2,7 +2,11 @@ const { Comment } = require('../models');
 
 exports.createComment = async (req, res) => {
     try {
-        const { text, articleId } = req.body;
+        const { text } = req.body;
+        const { articleId } = req.params;  
+        if (!text) {
+            return res.status(400).json({ message: 'required' });
+        }
         const newComment = await Comment.create({ text, articleId });
         res.status(201).json(newComment);
     } catch (error) {
@@ -12,8 +16,8 @@ exports.createComment = async (req, res) => {
 
 exports.getAllComments = async (req, res) => {
     try {
-        const { articleId } = req.params; 
-        const comments = await Comment.findAll({ where: { articleId } }); 
+        const { articleId } = req.params;  
+        const comments = await Comment.findAll({ where: { articleId } });
         res.status(200).json(comments);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -22,7 +26,8 @@ exports.getAllComments = async (req, res) => {
 
 exports.getCommentById = async (req, res) => {
     try {
-        const comment = await Comment.findByPk(req.params.id);
+        const { articleId, id } = req.params;  
+        const comment = await Comment.findOne({ where: { id, articleId } });
         if (!comment) {
             return res.status(404).json({ message: 'Comment not found' });
         }
@@ -34,8 +39,9 @@ exports.getCommentById = async (req, res) => {
 
 exports.updateComment = async (req, res) => {
     try {
+        const { articleId, id } = req.params;  
         const { text } = req.body;
-        const comment = await Comment.findByPk(req.params.id);
+        const comment = await Comment.findOne({ where: { id, articleId } });
         if (!comment) {
             return res.status(404).json({ message: 'Comment not found' });
         }
@@ -48,7 +54,8 @@ exports.updateComment = async (req, res) => {
 
 exports.deleteComment = async (req, res) => {
     try {
-        const comment = await Comment.findByPk(req.params.id);
+        const { articleId, id } = req.params; 
+        const comment = await Comment.findOne({ where: { id, articleId } });
         if (!comment) {
             return res.status(404).json({ message: 'Comment not found' });
         }
