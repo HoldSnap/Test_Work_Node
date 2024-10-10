@@ -22,7 +22,7 @@ const store = createStore({
   actions: {
     async fetchArticles({ commit }) {
       try {
-        const response = await apiClient.get('/articles');
+        const response = await apiClient.get('/article');
         commit('setArticles', response.data); 
       } catch (error) {
         console.error('Error fetching articles:', error);
@@ -40,21 +40,31 @@ const store = createStore({
       try {
         const response = await apiClient.post('/article', article); 
         commit('addArticle', response.data); 
+        console.log("Create");
       } catch (error) {
         console.error('Error creating article:', error);
       }
     },
-    async updateArticle({ commit }, { id, updatedArticle }) {
-      try {
-        const response = await apiClient.patch(`/article/${id}`, updatedArticle);
-        commit('updateArticle', { id, updatedArticle: response.data });
-      } catch (error) {
-        console.error('Error updating article:', error);
-      }
-    },
+    async updateArticle({ commit, state }, { id, updatedArticle }) {
+        try {
+          const oldArticle = state.articles.find(article => article.id === id);
+          console.log("Старые данные статьи:", oldArticle);
+
+      
+          const response = await apiClient.patch(`/article/${id}`, updatedArticle);
+      
+          commit('updateArticle', { id, updatedArticle: response.data });
+      
+          console.log("Новые данные статьи после обновления:", response.data);
+      
+        } catch (error) {
+          console.error('Ошибка при обновлении статьи:', error);
+        }
+      },
+      
   },
   getters: {
-    allArticles: (state) => state.articles, // Геттер для получения статей
+    allArticles: (state) => state.articles, 
   },
 });
 
