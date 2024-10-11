@@ -18,6 +18,11 @@ const routes = [
     name: 'edit-article',
     component: ArticleForm, 
   },
+  {
+    path: '/article/:articleId/comments',
+    component: () => import('@/components/comment/CommentList.vue')
+  }
+  
 ];
 
 const router = createRouter({

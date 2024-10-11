@@ -13,10 +13,11 @@
           <v-list-item-text>
             {{ article.content }}
           </v-list-item-text>
+
+          <v-btn @click="goToEditArticle(article.id)" color="secondary">Редактировать</v-btn>
+          <v-btn @click="deleteArticle(article.id)" color="red">Удалить</v-btn>
+          <v-btn @click="showComments(article.id)" color="primary">Показать комментарии</v-btn>
         </v-list-item-content>
-        <v-list-item-action>
-          <v-btn @click="goToEditArticle(article.id)" color="secondary">Редактировать</v-btn> 
-        </v-list-item-action>
       </v-list-item>
     </v-list>
   </v-container>
@@ -34,7 +35,7 @@ export default {
     const articles = computed(() => store.getters.allArticles); 
 
     const fetchArticles = async () => {
-      await store.dispatch('fetchArticles'); 
+      await store.dispatch('fetchArticles');
     };
 
     const formatDate = (dateString) => {
@@ -50,6 +51,15 @@ export default {
       router.push(`/article/${id}`); 
     };
 
+    const deleteArticle = async (id) => {
+      await store.dispatch('deleteArticle', id);
+      fetchArticles();
+    };
+
+    const showComments = (articleId) => {
+      router.push(`/article/${articleId}/comments`); 
+    };
+
     onMounted(() => {
       fetchArticles();
     });
@@ -59,6 +69,8 @@ export default {
       formatDate,
       goToAddArticle,
       goToEditArticle,
+      deleteArticle,
+      showComments,
     };
   },
 };
