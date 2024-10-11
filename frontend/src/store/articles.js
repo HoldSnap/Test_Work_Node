@@ -16,6 +16,9 @@ const mutations = {
     if (index !== -1) {
       state.articles.splice(index, 1, updatedArticle)
     }
+  },
+  removeArticle(state, id) {
+    state.articles = state.articles.filter(article => article.id !== id)
   }
 }
 
@@ -50,6 +53,14 @@ const actions = {
       commit('updateArticle', { id, updatedArticle: response.data })
     } catch (error) {
       console.error('Error updating article:', error)
+    }
+  },
+  async deleteArticle({ commit }, id) {
+    try {
+      await apiClient.delete(`/article/${id}`)
+      commit('removeArticle', id)
+    } catch (error) {
+      console.error('Error deleting article:', error)
     }
   }
 }
