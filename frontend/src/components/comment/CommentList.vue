@@ -11,12 +11,16 @@
           </v-list-item-subtitle>
         </v-list-item-content>
         <v-list-item-action>
-          <v-btn @click="editComment(comment)">Редактировать</v-btn> 
+          <v-btn @click="editComment(comment)">Редактировать</v-btn>
           <v-btn @click="deleteComment(comment.id)" color="red">Удалить</v-btn>
         </v-list-item-action>
       </v-list-item>
     </v-list>
-    <add-comment-form :articleId="articleId" :comment="currentComment" @commentAdded="fetchComments" />
+    <add-comment-form 
+      :articleId="articleId" 
+      :comment="currentComment" 
+      @commentAdded="onCommentAdded" 
+    />
   </v-container>
 </template>
 
@@ -55,12 +59,17 @@ export default {
     };
 
     const editComment = (comment) => {
-      currentComment.value = comment;
+      currentComment.value = comment; 
     };
 
     const deleteComment = async (commentId) => {
       await store.dispatch('deleteComment', { articleId: articleId.value, id: commentId });
       fetchComments();
+    };
+
+    const onCommentAdded = () => {
+      fetchComments();
+      currentComment.value = null; 
     };
 
     onMounted(() => {
@@ -76,7 +85,8 @@ export default {
       editComment,
       deleteComment,
       fetchComments,
-      currentComment 
+      currentComment, 
+      onCommentAdded 
     };
   },
 };
