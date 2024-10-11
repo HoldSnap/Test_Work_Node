@@ -10,7 +10,8 @@
 
 2. Запустите контейнеры:
    Перед запуском убедитесь, что вы в папке backend, т.к именно там находится docker-compose
-   для linux   
+
+    для linux   
    ```bash
    docker-compose up -d --build && docker-compose exec backend npx sequelize-cli db:migrate
    ```
@@ -22,7 +23,7 @@
    ```bash
    npx sequelize-cli db:seed:all
    ```
-3. Доступ к приложению:
+4. Доступ к приложению:
    - Фронтенд: [http://localhost:5173](http://localhost:5173)
    - Бэкенд: [http://localhost:3000](http://localhost:3000)
 
