@@ -1,4 +1,3 @@
-// articles.js
 import apiClient from '../services/api'
 
 const state = {
