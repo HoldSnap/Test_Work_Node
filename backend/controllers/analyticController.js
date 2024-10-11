@@ -1,5 +1,3 @@
-// controllers/analyticController.js
-
 const { Comment, Article, Op } = require('../models');
 
 exports.getCommentsByPeriod = async (req, res) => {
