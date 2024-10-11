@@ -3,24 +3,24 @@
     "username": "name1",
     "password": "pass",
     "database": "postgres2",
-    "host": "127.0.0.1",
-    "port": 5433,
+    "host": "pg",
+    "port": 5432,
     "dialect": "postgres"
   },
   "test": {
     "username": "name1",
     "password": "pass",
     "database": "postgres2",
-    "host": "127.0.0.1",
-    "port": 5433,
+    "host": "pg",
+    "port": 5432,
     "dialect": "postgres"
   },
   "production": {
     "username": "name1",
     "password": "pass",
     "database": "postgres2",
-    "host": "127.0.0.1",
-    "port": 5433,
+    "host": "pg",
+    "port": 5432,
     "dialect": "postgres"
   }
 }
