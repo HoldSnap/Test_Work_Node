@@ -1,7 +1,8 @@
 <template>
   <v-container>
     <v-btn @click="goToAddArticle" color="primary">Добавить статью</v-btn>
-    <v-btn @click="$router.push('/comments/filter')">Фильтр комментариев</v-btn>
+    <span> | </span>
+    <v-btn @click="$router.push('/comments/filter')" color="primary">Фильтр комментариев</v-btn>
     <v-list>
       <v-list-item v-for="article in articles" :key="article.id">
         <v-list-item-content>
@@ -14,7 +15,7 @@
           <v-list-item-text>
             {{ article.content }}
           </v-list-item-text>
-
+          <div></div>
           <v-btn @click="goToEditArticle(article.id)" color="secondary">Редактировать</v-btn>
           <v-btn @click="deleteArticle(article.id)" color="red">Удалить</v-btn>
           <v-btn @click="showComments(article.id)" color="primary">Показать комментарии</v-btn>

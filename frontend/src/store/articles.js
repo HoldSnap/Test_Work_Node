@@ -28,7 +28,7 @@ const actions = {
       console.error('Error fetching articles:', error)
     }
   },
-  async fetchArticle(id) {
+  async fetchArticle({ commit }, id) {
     try {
       const response = await apiClient.get(`/article/${id}`)
       return response.data

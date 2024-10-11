@@ -55,7 +55,7 @@ const actions = {
       console.error('Error deleting comment:', error)
     }
   },
-  async fetchCommentsByPeriod( { dateFrom, dateTo }) {
+  async fetchCommentsByPeriod({ commit }, { dateFrom, dateTo }) {
     try {
       const response = await apiClient.get(`/analytic/comments?dateFrom=${dateFrom}&dateTo=${dateTo}`);
       return response.data; 
