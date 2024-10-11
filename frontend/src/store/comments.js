@@ -55,16 +55,15 @@ const actions = {
       console.error('Error deleting comment:', error)
     }
   },
-  async fetchCommentsByPeriod({ commit }, { dateFrom, dateTo }) {
+  async fetchCommentsByPeriod( { dateFrom, dateTo }) {
     try {
-        const response = await apiClient.get('/analytic/comments', {
-            params: { dateFrom, dateTo },
-        });
-        commit('setComments', response.data); 
+      const response = await apiClient.get(`/analytic/comments?dateFrom=${dateFrom}&dateTo=${dateTo}`);
+      return response.data; 
     } catch (error) {
-        console.error('Error fetching comments by period:', error);
+      console.error('Error fetching comments by period:', error);
+      throw error; 
     }
-    },
+  },
 }
 
 const getters = {

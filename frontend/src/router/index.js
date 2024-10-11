@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import ArticleList from '@/components/article/ArticleList.vue';
 import ArticleForm from '@/components/article/ArticleForm.vue'; 
+import CommentFilter from '@/components/comment/CommentFilter.vue';
+import CommentList from '@/components/comment/CommentList.vue';
 
 const routes = [
   {
@@ -20,8 +22,12 @@ const routes = [
   },
   {
     path: '/article/:articleId/comments',
-    component: () => import('@/components/comment/CommentList.vue')
-  }
+    component: CommentList
+  },
+  {
+    path: '/comments/filter',
+    component: CommentFilter,
+  },
   
 ];
 

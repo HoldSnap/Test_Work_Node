@@ -1,6 +1,7 @@
 <template>
   <v-container>
     <v-btn @click="goToAddArticle" color="primary">Добавить статью</v-btn>
+    <v-btn @click="$router.push('/comments/filter')">Фильтр комментариев</v-btn>
     <v-list>
       <v-list-item v-for="article in articles" :key="article.id">
         <v-list-item-content>
