@@ -11,20 +11,20 @@
           </v-list-item-subtitle>
         </v-list-item-content>
         <v-list-item-action>
-          <v-btn @click="editComment(comment.id)">Редактировать</v-btn>
+          <v-btn @click="editComment(comment)">Редактировать</v-btn> 
           <v-btn @click="deleteComment(comment.id)" color="red">Удалить</v-btn>
         </v-list-item-action>
       </v-list-item>
     </v-list>
-    <add-comment-form :articleId="articleId" @commentAdded="fetchComments" />
+    <add-comment-form :articleId="articleId" :comment="currentComment" @commentAdded="fetchComments" />
   </v-container>
 </template>
 
 <script>
-import { onMounted, computed } from 'vue';
+import { onMounted, computed, ref } from 'vue';
 import { useStore } from 'vuex'; 
 import { useRouter, useRoute } from 'vue-router';
-import AddCommentForm from './AddComent.vue';
+import AddCommentForm from './CommentForm.vue';
 
 export default {
   components: { AddCommentForm },
@@ -39,6 +39,8 @@ export default {
       return article ? article.title : '';
     });
 
+    const currentComment = ref(null);
+
     const fetchComments = async () => {
       await store.dispatch('fetchComments', articleId.value);
     };
@@ -52,8 +54,8 @@ export default {
       router.push('/');
     };
 
-    const editComment = (commentId) => {
-      router.push(`/article/${articleId.value}/comments/${commentId}/edit`);
+    const editComment = (comment) => {
+      currentComment.value = comment;
     };
 
     const deleteComment = async (commentId) => {
@@ -73,7 +75,8 @@ export default {
       goBack,
       editComment,
       deleteComment,
-      fetchComments
+      fetchComments,
+      currentComment 
     };
   },
 };
