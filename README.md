@@ -11,7 +11,7 @@
 2. Запустите контейнеры:
    Перед запуском убедитесь, что вы в папке backend, т.к именно там находится docker-compose
    ```bash
-   docker-compose up -d 
+   docker-compose up -d --build && docker-compose exec backend npx sequelize-cli db:migrate
    ```
     Также для удобства есть seeds для заполнения БД
    ```bash
